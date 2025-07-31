@@ -17,10 +17,10 @@ interface Movie {
 
 interface TrendingMovie {
   searchTerm: string;
-  movie_id: number;
+  id: number;
   title: string;
   count: number;
-  poster_url: string;
+  poster_path: string;
 }
 
 interface MovieDetails {
@@ -74,4 +74,12 @@ interface MovieDetails {
 interface TrendingCardProps {
   movie: TrendingMovie;
   index: number;
+}
+
+interface SavedMovie {
+  movie_id: number;
+  title: string;
+  poster_url: string | null;
+  vote_average?: number;
+  release_date?: string;
 }

@@ -41,3 +41,40 @@ export const fetchTMDB = async ({ query, totalMovies = 50 }: FetchTMDBOptions) =
     throw new Error(`Error fetching TMDB data: ${err.message}`);
   }
 };
+
+export const fetchMovieDetails = async (movieId: string): Promise<MovieDetails> => {
+  try {
+    const res = await fetch(`${TMDB_CONFIG.BASE_URL}/movie/${movieId}?api_key=${TMDB_CONFIG.API_KEY}`, {
+      method: "GET",
+      headers: TMDB_CONFIG.headers,
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch movie details: ${res.statusText}`);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error(`Error fetching movie details for ID ${movieId}`);
+  }
+};
+
+export const fetchTrendingMovies = async (): Promise<TrendingMovie[]> => {
+  try {
+    const res = await fetch(`${TMDB_CONFIG.BASE_URL}/trending/movie/day?limit=9&api_key=${TMDB_CONFIG.API_KEY}`, {
+      method: "GET",
+      headers: TMDB_CONFIG.headers,
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch trending movies: ${res.statusText}`);
+    }
+    return data.results.slice(0, 9);
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error fetching trending movies");
+  }
+};
