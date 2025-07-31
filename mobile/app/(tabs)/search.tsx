@@ -1,7 +1,7 @@
 import MovieCard from "@/components/MovieCard";
 import SearchBar from "@/components/SearchBar";
-import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
+import { updateSearchCount } from "@/services/appwrite";
 import { fetchTMDB } from "@/services/tmdb";
 import useFetch from "@/services/useFetch";
 import React, { useEffect, useState } from "react";
@@ -20,6 +20,9 @@ const search = () => {
     const func = setTimeout(async () => {
       if (searchQuery.trim()) {
         await refetch();
+        // if (movies?.length! > 0 && movies?.[0]) {
+        //   await updateSearchCount(searchQuery, movies[0]);
+        // }
       } else {
         reset();
       }
@@ -27,6 +30,12 @@ const search = () => {
 
     return () => clearTimeout(func);
   }, [searchQuery]);
+
+  // useEffect(() => {
+  //   if (movies?.length! > 0 && movies?.[0]) {
+  //     updateSearchCount(searchQuery, movies[0]);
+  //   }
+  // }, [movies]);
 
   return (
     <View className="flex-1 bg-primary">
@@ -46,7 +55,8 @@ const search = () => {
         ListHeaderComponent={
           <>
             <View className="w-full flex-row justify-center items-center mt-20">
-              <Image source={icons.logo} className="w-12 h-10" />
+              {/* <Image source={icons.logo} className="w-12 h-10" /> */}
+              <Text className="text-accent text-xl font-bold text-center">Stream Cove</Text>
             </View>
             <View className="my-5">
               <SearchBar placeholder="Search for movies" value={searchQuery} onChangeText={handleSearch} />
