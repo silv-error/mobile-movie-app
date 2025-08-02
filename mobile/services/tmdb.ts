@@ -78,3 +78,22 @@ export const fetchTrendingMovies = async (): Promise<TrendingMovie[]> => {
     throw new Error("Error fetching trending movies");
   }
 };
+
+export const fetchMovieTrailer = async (movieId: string): Promise<MovieTrailer[]> => {
+  try {
+    const res = await fetch(`${TMDB_CONFIG.BASE_URL}/movie/${movieId}/videos?api_key=${TMDB_CONFIG.API_KEY}`, {
+      method: "GET",
+      headers: TMDB_CONFIG.headers,
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch movie trailer: ${res.statusText}`);
+    }
+
+    return data.results;
+  } catch (error) {
+    console.error(error);
+    throw new Error(`Error fetching movie trailer for ID ${movieId}`);
+  }
+};

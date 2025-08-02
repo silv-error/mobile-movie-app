@@ -83,3 +83,17 @@ interface SavedMovie {
   vote_average?: number;
   release_date?: string;
 }
+
+interface MovieTrailer {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  key: string;
+  name: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id_str: string;
+}
