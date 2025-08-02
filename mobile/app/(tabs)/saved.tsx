@@ -1,5 +1,4 @@
 import MovieCard from "@/components/MovieCard";
-import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { getSavedMovies } from "@/services/appwrite";
 import React, { useEffect } from "react";
@@ -12,7 +11,6 @@ const saved = () => {
     const fetchSavedMovies = async () => {
       try {
         const savedMovies = await getSavedMovies();
-        console.log("Saved Movies:", savedMovies);
         setMovies(savedMovies);
       } catch (error) {
         console.error("Error fetching saved movies:", error);

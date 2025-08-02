@@ -56,7 +56,7 @@ export default function Index() {
           <View>
             <SearchBar onPress={() => router.push("/search")} placeholder="Search for movies" />
             {trendingMovies && (
-              <View className="mt-10 pr-10">
+              <View className="mt-10">
                 <Text className="text-lg text-white font-bold mb-3">Trending Movies</Text>
                 <FlatList
                   horizontal
